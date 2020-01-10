@@ -43,7 +43,8 @@ SL_NORETURN static void bootToApp(uint32_t startOfAppSpace)
 
 	BTMesh();
 
-  (void)startOfAppSpace;
+#if 0
+	(void)startOfAppSpace;
   SCB->VTOR = startOfAppSpace;
 
   // Load SP and PC of application
@@ -54,10 +55,11 @@ SL_NORETURN static void bootToApp(uint32_t startOfAppSpace)
         "ldr r0, [r0, #4] \n" // Load PC into R0
         "mov pc, r0       \n" // Set PC
         :: "r" (startOfAppSpace) : "r0", "r1");
-
+#endif
   while (1) {
     // Do nothing
   }
+
 }
 
 void commissioningLedEventHandler(void)
